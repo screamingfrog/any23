@@ -28,6 +28,7 @@ import org.apache.any23.util.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.eclipse.jetty.http.HttpTester;
 import org.eclipse.jetty.servlet.ServletTester;
@@ -228,6 +229,7 @@ public class ServletTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testGETwithURLEncoding() throws Exception {
         content = null;
         HttpTester.Response response = doGetRequest("/best/http://semanticweb.org/wiki/Knud_M%C3%B6ller");
@@ -241,6 +243,7 @@ public class ServletTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testGETwithURLEncodingWithQuery() throws Exception {
         content = null;
         HttpTester.Response response = doGetRequest("/best/http://semanticweb.org/wiki/Knud_M%C3%B6ller?appo=xxx");
@@ -254,6 +257,7 @@ public class ServletTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testGETwithURLEncodingWithFragment() throws Exception {
         content = null;
         HttpTester.Response response = doGetRequest("/best/http://semanticweb.org/wiki/Knud_M%C3%B6ller#abcde");
