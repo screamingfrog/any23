@@ -104,7 +104,7 @@ public class SingleDocumentExtraction {
     private ExtractionParameters tagSoupDOMRelatedParameters = null;
 
     private String parserEncoding = null;
-
+    
     /**
      * Builds an extractor by the specification of document source,
      * list of extractors and output triple handler.
@@ -220,19 +220,19 @@ public class SingleDocumentExtraction {
         } catch (Exception ex) {
             throw new IllegalArgumentException("Invalid IRI: " + in.getDocumentIRI(), ex);
         }
-        if (log.isDebugEnabled()) {
-            log.debug("Processing " + this.documentIRI);
+        if (log.isInfoEnabled()) {
+            log.info("Processing " + this.documentIRI);
         }
         filterExtractorsByMIMEType();
 
-        if(log.isDebugEnabled()) {
+        if(log.isInfoEnabled()) {
             StringBuilder sb = new StringBuilder("Extractors ");
             for (ExtractorFactory<?> factory : matchingExtractors) {
                 sb.append(factory.getExtractorName());
                 sb.append(' ');
             }
             sb.append("match ").append(documentIRI);
-            log.debug(sb.toString());
+            log.info(sb.toString());
         }
 
         final List<ResourceRoot> resourceRoots = new ArrayList<>();
@@ -452,7 +452,7 @@ public class SingleDocumentExtraction {
         try {
             document = new HTMLDocument( getTagSoupDOM(extractionParameters).getDocument() );
         } catch (IOException ioe) {
-            log.debug("Cannot extract language from document.", ioe);
+            log.info("Cannot extract language from document.", ioe);
             return null;
         }
         return document.getDefaultLanguage();
@@ -479,7 +479,7 @@ public class SingleDocumentExtraction {
                 localDocumentSource.openInputStream(),
                 MIMEType.parse(localDocumentSource.getContentType())
         );
-        log.debug("detected media type: " + detectedMIMEType);
+        log.info("detected media type: " + detectedMIMEType);
         matchingExtractors = extractors.filterByMIMEType(detectedMIMEType);
     }
 
@@ -498,8 +498,8 @@ public class SingleDocumentExtraction {
             final String documentLanguage,
             final Extractor<?> extractor
     ) throws ExtractionException, IOException, ValidatorException {
-        if(log.isDebugEnabled()) {
-            log.debug("Running {} on {}", extractor.getDescription().getExtractorName(), documentIRI);
+        if(log.isInfoEnabled()) {
+            log.info("Running {} on {}", extractor.getDescription().getExtractorName(), documentIRI);
         }
         long startTime = System.currentTimeMillis();
         final ExtractionContext extractionContext = new ExtractionContext(
@@ -541,22 +541,22 @@ public class SingleDocumentExtraction {
                     extractionResult.wasTouched()
                 );
         } catch (ExtractionException ex) {
-            if(log.isDebugEnabled()) {
-                log.debug(extractor.getDescription().getExtractorName() + ": " + ex.getMessage());
+            if(log.isInfoEnabled()) {
+                log.info(extractor.getDescription().getExtractorName() + ": " + ex.getMessage());
             }
             throw ex;
         } finally {
             // Logging result error report.
-            if(log.isDebugEnabled() && extractionResult.hasIssues() ) {
+            if(log.isInfoEnabled() && extractionResult.hasIssues() ) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 extractionResult.printReport(new PrintStream(baos));
-                log.debug(baos.toString());
+                log.info(baos.toString());
             }
             extractionResult.close();
 
             long elapsed = System.currentTimeMillis() - startTime;
-            if(log.isDebugEnabled()) {
-                log.debug("Completed " + extractor.getDescription().getExtractorName() + ", " + elapsed + "ms");
+            if(log.isInfoEnabled()) {
+                log.info("Completed " + extractor.getDescription().getExtractorName() + ", " + elapsed + "ms");
             }
         }
     }
