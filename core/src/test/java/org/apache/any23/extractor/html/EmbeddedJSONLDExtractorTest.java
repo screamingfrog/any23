@@ -29,35 +29,35 @@ import org.junit.Test;
 public class EmbeddedJSONLDExtractorTest extends AbstractExtractorTestCase {
 
 	@Test
-	public void testEmbeddedJSONLDInHead() throws Exception {
+	public void testEmbeddedJSONLDInHead() {
 		assertExtract("/html/html-embedded-jsonld-extractor.html");
 		assertModelNotEmpty();
 		assertStatementsSize(null, null, null, 3);
 	}
 
 	@Test
-	public void testSeveralEmbeddedJSONLDInHead() throws Exception {
+	public void testSeveralEmbeddedJSONLDInHead() {
 		assertExtract("/html/html-embedded-jsonld-extractor-multiple.html");
 		assertModelNotEmpty();
 		assertStatementsSize(null, null, null, 7);
 	}
 
 	@Test
-	public void testEmbeddedJSONLDInBody() throws Exception {
+	public void testEmbeddedJSONLDInBody() {
 		assertExtract("/html/html-body-embedded-jsonld-extractor.html");
 		assertModelNotEmpty();
 		assertStatementsSize(null, null, null, 3);
 	}
 
 	@Test
-	public void testEmbeddedJSONLDInHeadAndBody() throws Exception {
+	public void testEmbeddedJSONLDInHeadAndBody() {
 		assertExtract("/html/html-head-and-body-embedded-jsonld-extractor.html");
 		assertModelNotEmpty();
 		assertStatementsSize(null, null, null, 7);
 	}
 
 	@Test
-	public void testJSONLDCommentStripping() throws Exception {
+	public void testJSONLDCommentStripping() {
 		assertExtract("/html/html-jsonld-strip-comments.html");
 		assertModelNotEmpty();
 		assertStatementsSize(null, null, null, 3);
@@ -91,7 +91,7 @@ public class EmbeddedJSONLDExtractorTest extends AbstractExtractorTestCase {
 	}
 
 	@Test
-	public void testJSONLDBadCharacter() throws Exception {
+	public void testJSONLDBadCharacter() {
 		assertExtract("/html/html-jsonld-bad-character.html");
 		assertStatementsSize(null, null, null, 12);
 	}
